@@ -3,6 +3,7 @@ import numpy as np
 import random
 import math
 from dtree import entropy,averageGain,buildTree,check
+import matplotlib.pyplot as plt
 
 S1 = m.monk1
 S2 = m.monk2
@@ -101,4 +102,13 @@ for j,rate in enumerate(split_rates):
     acc_cv = np.mean(acc,axis=0)
     acc_holder[j,:] = acc_cv
 
-print(acc_holder)
+fig = plt.figure(figsize=(8,8))
+ax1 = fig.add_subplot(111)
+ax1.plot(split_rates,acc_holder[:,0],'r',label='MONK1')
+ax1.plot(split_rates,acc_holder[:,1],'b',label='MONK2')
+ax1.plot(split_rates,acc_holder[:,2],'g',label='MONK3')
+
+plt.legend()
+plt.xlabel('Split Rate')
+plt.ylabel('Score')
+plt.show()
